@@ -1,15 +1,34 @@
-apiVersion: extensions/v1beta1
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: ingress-name-based
+#   annotations:
+#     traefik.ingress.kubernetes.io/affinity: "true"
+# spec:
+#   rules:
+#   - host: base.amordemaria.com
+#     http:
+#       paths:
+#       - path: "/"
+#         backend:
+#           serviceName: mongo
+#           servicePort: 27017
+---
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-name-based
+  name: ingress
   annotations:
-    traefik.ingress.kubernetes.io/affinity: "true"
+    external-dns.alpha.kubernetes.io/hostname: hello.amordemaria.com
+    external-dns.alpha.kubernetes.io/ttl: "30"
 spec:
   rules:
-  - host: base.amordemaria.com
-    http:
+  - http:
       paths:
-      - path: "/"
+      - path: /v1
+        pathType: Prefix
         backend:
-          serviceName: mongo
-          servicePort: 27017
+          service:
+            name: angular
+            port:
+              number: 8080
