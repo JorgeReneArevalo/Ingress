@@ -14,21 +14,37 @@
 #           serviceName: mongo
 #           servicePort: 27017
 ---
-apiVersion: networking.k8s.io/v1
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: ingress
+#   annotations:
+#     external-dns.alpha.kubernetes.io/hostname: amordemaria.store
+#     external-dns.alpha.kubernetes.io/ttl: "30"
+# spec:
+#   rules:
+#   - http:
+#       paths:
+#       - path: /v1
+#         pathType: Prefix
+#         backend:
+#           service:
+#             name: angular
+#             port:
+#               number: 4200
+---
+apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: ingress
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: amordemaria.store
-    external-dns.alpha.kubernetes.io/ttl: "30"
+    traefik.ingress.kubernetes.io/affinity: "true"
 spec:
   rules:
-  - http:
+  - host: amordemaria.store
+    http:
       paths:
-      - path: /v1
-        pathType: Prefix
+      - path: "/"
         backend:
-          service:
-            name: angular
-            port:
-              number: 4200
+          serviceName: angular
+          servicePort: 4200
