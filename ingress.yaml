@@ -19,7 +19,7 @@ kind: Ingress
 metadata:
   name: ingress
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: hello.amordemaria.com
+    external-dns.alpha.kubernetes.io/hostname: amordemaria.store
     external-dns.alpha.kubernetes.io/ttl: "30"
 spec:
   rules:
@@ -31,4 +31,4 @@ spec:
           service:
             name: angular
             port:
-              number: 8080
+              number: 4200
