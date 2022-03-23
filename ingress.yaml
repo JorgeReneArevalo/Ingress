@@ -41,7 +41,7 @@ metadata:
     traefik.ingress.kubernetes.io/affinity: "true"
 spec:
   rules:
-  - host: amordemaria.store
+  - host: app.amordemaria.store
     http:
       paths:
       - path: "/"
