@@ -64,4 +64,4 @@ spec:
       - path: /
         backend:
           serviceName: angular
-          servicePort: 4200
+          servicePort: 80
